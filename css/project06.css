@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    margin: 20px;
+}
+
+#search-bar {
+    width: 300px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#periodic-table {
+    display: grid;
+    grid-template-columns: repeat(18, 50px);
+    gap: 5px;
+    justify-content: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.element {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ffffff;
+    transition: transform 0.2s, background-color 0.2s;
+    grid-row: span 1;
+    grid-column: span 1;
+}
+
+.element:hover {
+    transform: scale(1.1);
+    background-color: #e0e7ff;
+}
+
+.selected {
+    background-color: #ffde59 !important;
+    border-color: #ff9800;
+}
+
+.hidden {
+    display: none;
+}
+
+#element-info {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Positioning specific elements to match periodic table layout */
+.element:nth-child(1) { grid-column: 1 / span 1; }
+.element:nth-child(2) { grid-column: 18 / span 1; }
+
+/* Add rows for group placeholders */
+#periodic-table::before {
+    content: "";
+    display: block;
+    grid-column: 2 / span 16;
+    grid-row: 1;
+    height: 0;
+}
+
+/* Group placeholders */
+.element:nth-child(n+3):nth-child(-n+10) {
+    grid-row: 2;
+    grid-column: calc(1 + (n - 3));
+}
+
+.element:nth-child(n+11):nth-child(-n+18) {
+    grid-row: 2;
+    grid-column: calc(18 - (18 - n) + 2);
+}
